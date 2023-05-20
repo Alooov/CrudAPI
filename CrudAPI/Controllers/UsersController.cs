@@ -20,4 +20,14 @@ public class UsersController : BaseApiController
 
         return Ok(users);
     }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var user = await _context.Users.FindAsync(id);
+
+        if (user is null) return NotFound();
+
+        return Ok(user);
+    }
 }
